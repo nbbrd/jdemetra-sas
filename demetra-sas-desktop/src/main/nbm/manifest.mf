@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Localizing-Bundle: be/nbb/demetra/sas/Bundle.properties
+OpenIDE-Module-Name: Demetra - Sas
+OpenIDE-Module-Display-Category: IO
