@@ -1,17 +1,17 @@
 /*
  * Copyright 2013 National Bank of Belgium
- * 
- * Licensed under the EUPL, Version 1.1 or - as soon they will be approved 
+ *
+ * Licensed under the EUPL, Version 1.1 or - as soon they will be approved
  * by the European Commission - subsequent versions of the EUPL (the "Licence");
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
- * 
+ *
  * http://ec.europa.eu/idabc/eupl
- * 
- * Unless required by applicable law or agreed to in writing, software 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the Licence is distributed on an "AS IS" basis,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the Licence for the specific language governing permissions and 
+ * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
  */
 package internal.sas7bdat;
@@ -25,10 +25,12 @@ import java.util.Map.Entry;
 import javax.annotation.Nonnull;
 import java.util.SortedMap;
 import java.util.SortedSet;
+
 import ec.tss.tsproviders.utils.IteratorWithIO;
 import internal.xdb.DbBasicSelect;
 import internal.xdb.DbRawDataUtil;
 import internal.xdb.DbRawDataUtil.SuperDataType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -38,13 +40,13 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+
 import sasquatch.SasColumn;
 import sasquatch.SasForwardCursor;
 import sasquatch.SasMetaData;
 import sasquatch.Sasquatch;
 
 /**
- *
  * @author Philippe Charles
  */
 @lombok.AllArgsConstructor
@@ -144,7 +146,8 @@ public final class SasStatement implements Closeable {
 
         @Override
         public double getNumber(int columnIndex) throws IOException, IndexOutOfBoundsException, IllegalArgumentException {
-            return ((Number) getValue(columnIndex)).doubleValue();
+            Number value = (Number) getValue(columnIndex);
+            return value != null ? value.doubleValue() : Double.NaN;
         }
 
         @Override

@@ -170,7 +170,7 @@ public final class SasTableAsCubeResource implements TableAsCubeAccessor.Resourc
         T process(@Nonnull SasForwardCursor rs, @Nonnull AutoCloseable closeable) throws IOException;
 
         @Nullable
-        default public T call(@Nonnull Sasquatch sasquatch, @Nonnull HasFilePaths paths, @Nonnull File folder) throws IOException {
+        default T call(@Nonnull Sasquatch sasquatch, @Nonnull HasFilePaths paths, @Nonnull File folder) throws IOException {
             SasStatement stmt = null;
             SasForwardCursor rs = null;
             try {

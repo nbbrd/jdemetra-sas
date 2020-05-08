@@ -142,7 +142,7 @@ public final class SasFileProvider implements IFileLoader {
             return param.getCubeIdParam(dataSource);
         }
 
-        private CubeAccessor load(DataSource key) throws FileNotFoundException {
+        private CubeAccessor load(DataSource key) {
             SasFileBean bean = param.get(key);
             SasTableAsCubeResource result = SasTableAsCubeResource.create(sasquatch.get(), paths, bean.getFile(), bean.getTable(), bean.getDimColumns(), toDataParams(bean), bean.getObsGathering(), bean.getLabelColumn());
             return TableAsCubeAccessor.create(result).bulk(bean.getCacheDepth(), GuavaCaches.ttlCacheAsMap(bean.getCacheTtl()));

@@ -50,6 +50,6 @@ public final class SasFileBean implements IFileBean {
     }
 
     public void setCacheDepth(int cacheDepth) {
-        this.cacheDepth = cacheDepth >= 0 ? cacheDepth : 0;
+        this.cacheDepth = Math.max(cacheDepth, 0);
     }
 }

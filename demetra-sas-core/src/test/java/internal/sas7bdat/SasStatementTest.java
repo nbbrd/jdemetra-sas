@@ -131,7 +131,7 @@ public class SasStatementTest {
 
             LinkedList<String> result = new LinkedList<>();
             while (rs.next()) {
-                result.add((String) rs.getValue(0) + " - " + (String) rs.getValue(1));
+                result.add(rs.getValue(0) + " - " + rs.getValue(1));
             }
             assertEquals(12, result.size());
             assertEquals("Monthly - Chrome", result.getFirst());
@@ -151,7 +151,7 @@ public class SasStatementTest {
 
             LinkedList<String> result = new LinkedList<>();
             while (rs.next()) {
-                result.add((String) rs.getValue(0) + " - " + (String) rs.getValue(1));
+                result.add(rs.getValue(0) + " - " + rs.getValue(1));
             }
             assertEquals(2, result.size());
             assertEquals("Monthly - IE", result.getFirst());

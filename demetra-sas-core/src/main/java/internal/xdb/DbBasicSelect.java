@@ -156,23 +156,23 @@ public final class DbBasicSelect {
         @Override
         public DbBasicSelect build() {
             return new DbBasicSelect(tableName, distinct,
-                    immmutableCopyOf(select),
-                    immmutableCopyOf(filterItems),
-                    immmutableCopyOf(order));
+                    immutableCopyOfList(select),
+                    immutableCopyOfMap(filterItems),
+                    immutableCopyOfList(order));
         }
 
-        private static <X> List<X> immmutableCopyOf(List<X> input) {
+        private static <X> List<X> immutableCopyOfList(List<X> input) {
             switch (input.size()) {
                 case 0:
                     return Collections.emptyList();
                 case 1:
                     return Collections.singletonList(input.get(0));
                 default:
-                    return Collections.unmodifiableList(new ArrayList(input));
+                    return Collections.unmodifiableList(new ArrayList<>(input));
             }
         }
 
-        private static <K, V> Map<K, V> immmutableCopyOf(Map<K, V> input) {
+        private static <K, V> Map<K, V> immutableCopyOfMap(Map<K, V> input) {
             switch (input.size()) {
                 case 0:
                     return Collections.emptyMap();
@@ -180,7 +180,7 @@ public final class DbBasicSelect {
                     Map.Entry<K, V> single = input.entrySet().iterator().next();
                     return Collections.singletonMap(single.getKey(), single.getValue());
                 default:
-                    return Collections.unmodifiableMap(new HashMap(input));
+                    return Collections.unmodifiableMap(new HashMap<>(input));
             }
         }
     }

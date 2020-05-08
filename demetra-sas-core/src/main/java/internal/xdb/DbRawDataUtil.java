@@ -67,7 +67,7 @@ public class DbRawDataUtil {
             public int compare(Object l, Object r) {
                 return l.toString().compareTo(r.toString());
             }
-        };
+        }
     }
 
     @Nonnull
@@ -166,7 +166,6 @@ public class DbRawDataUtil {
         return IteratorWithIO.from(tmp.iterator());
     }
 
-    @Nonnull
     public <C> boolean isSortRequired(boolean distinct, @Nonnull List<C> selectColumns, @Nonnull List<C> orderColumns) {
         return !orderColumns.isEmpty() && !(distinct && Iterables.elementsEqual(selectColumns, orderColumns));
     }

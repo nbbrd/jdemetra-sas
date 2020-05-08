@@ -23,7 +23,7 @@
 
     <properties>
         <demetra.version>2.2.0</demetra.version>
-        <sasquatch.version>1.0.0-SNAPSHOT</sasquatch.version>
+        <sasquatch.version>1.0.0</sasquatch.version>
     </properties>
 
     <modules>

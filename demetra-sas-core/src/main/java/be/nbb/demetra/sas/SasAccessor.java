@@ -144,8 +144,6 @@ final class SasAccessor extends DbAccessor.Commander<SasBean> {
                 SasFunc<Number> toValue = SasFunc.onNumber(rs, 1, numberParser);
 
                 DbUtil.SeriesWithDataCursor<IOException> cursor = new DbUtil.SeriesWithDataCursor<IOException>() {
-                    int index = 0;
-
                     @Override
                     public boolean next() throws IOException {
                         boolean result = rs.next();
@@ -183,8 +181,6 @@ final class SasAccessor extends DbAccessor.Commander<SasBean> {
                 SasFunc<String> toChild = SasFunc.onGetObjectToString(0);
 
                 DbUtil.ChildrenCursor<IOException> cursor = new DbUtil.ChildrenCursor<IOException>() {
-                    int index = 0;
-
                     @Override
                     public boolean next() throws IOException {
                         boolean result = rs.next();

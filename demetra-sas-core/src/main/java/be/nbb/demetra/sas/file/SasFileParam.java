@@ -51,7 +51,7 @@ interface SasFileParam extends IParam<DataSource, SasFileBean> {
     @Nonnull
     IParam<DataSet, CubeId> getCubeIdParam(@Nonnull DataSource dataSource);
 
-    static class V1 implements SasFileParam {
+    class V1 implements SasFileParam {
 
         private final Splitter dimensionSplitter = Splitter.on(',').trimResults().omitEmptyStrings();
         private final Joiner dimensionJoiner = Joiner.on(',');

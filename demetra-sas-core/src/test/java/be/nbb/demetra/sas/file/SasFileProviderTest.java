@@ -32,6 +32,8 @@ import ec.tstoolkit.timeseries.simplets.TsPeriod;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import sasquatch.Sasquatch;
@@ -120,7 +122,7 @@ public class SasFileProviderTest {
         SasFileBean result = o.newBean();
         result.setFile(RESOURCE.getParentFile());
         result.setTable(RESOURCE.getName());
-        result.setDimColumns(Arrays.asList("Freq,Browser"));
+        result.setDimColumns(Collections.singletonList("Freq,Browser"));
         result.setPeriodColumn("Period");
         result.setValueColumn("MarketShare");
         result.setCacheDepth(0);

@@ -97,7 +97,7 @@ public class SasAutoCompletion {
 
     private List<String> filterAndSortTables(List<String> values, String term) {
         return values.stream()
-                .filter(ExtAutoCompletionSource.basicFilter(term)::test)
+                .filter(ExtAutoCompletionSource.basicFilter(term))
                 .sorted()
                 .collect(Collectors.toList());
     }
