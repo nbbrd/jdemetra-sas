@@ -24,7 +24,7 @@
     </licenses>
 
     <properties>
-        <demetra.version>2.2.0</demetra.version>
+        <demetra.version>2.2.2</demetra.version>
         <sasquatch.version>1.0.0</sasquatch.version>
     </properties>
 
