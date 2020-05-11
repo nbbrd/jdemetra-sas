@@ -19,6 +19,7 @@ package be.nbb.demetra.sas;
 import ec.nbdemetra.ui.DemetraUI;
 import ec.nbdemetra.ui.properties.NodePropertySetBuilder;
 import ec.util.various.swing.BasicFileViewer;
+import internal.demetra.sas.SasBasicFileHandler;
 import java.awt.BorderLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -39,7 +40,6 @@ import org.openide.util.ImageUtilities;
 import org.openide.util.NbBundle.Messages;
 import org.openide.util.lookup.Lookups;
 import org.openide.windows.TopComponent;
-import sasquatch.desktop.SasBasicFileHandler;
 
 /**
  * Top component which displays something.

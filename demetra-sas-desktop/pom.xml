@@ -121,17 +121,6 @@
         
         <dependency>
             <groupId>be.nbb.rd</groupId>
-            <artifactId>sasquatch-desktop</artifactId>
-            <version>${sasquatch.version}</version>            
-            <exclusions>
-                <exclusion>
-                    <groupId>eu.europa.ec.joinup.sat</groupId>
-                    <artifactId>nbdemetra-utils</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>be.nbb.rd</groupId>
             <artifactId>sasquatch-ri</artifactId>
             <version>${sasquatch.version}</version>
         </dependency>
