@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>be.nbb.demetra</groupId>
@@ -9,6 +10,7 @@
 
     <name>Demetra - Sas</name>
     <description>A pure Java library to read time series from SAS datasets.</description>
+    <url>https://github.com/nbbrd/jdemetra-sas</url>
 
     <organization>
         <name>National Bank of Belgium</name>
@@ -53,7 +55,7 @@
             <properties>
                 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
                 <maven.compiler.target>1.8</maven.compiler.target>
-                <maven.compiler.source>1.8</maven.compiler.source>                
+                <maven.compiler.source>1.8</maven.compiler.source>
             </properties>
             <build>
                 <plugins>
@@ -105,6 +107,9 @@
                                             <version>3.3.9</version>
                                         </requireMavenVersion>
                                         <DependencyConvergence/>
+                                        <requireReleaseDeps>
+                                            <onlyWhenRelease>true</onlyWhenRelease>
+                                        </requireReleaseDeps>
                                     </rules>
                                 </configuration>
                                 <goals>
@@ -130,7 +135,7 @@
                     <plugin>
                         <groupId>org.gaul</groupId>
                         <artifactId>modernizer-maven-plugin</artifactId>
-                        <version>2.0.0</version>
+                        <version>2.1.0</version>
                         <configuration>
                             <javaVersion>1.8</javaVersion>
                         </configuration>
@@ -165,7 +170,7 @@
                     <artifactId>jaxb-runtime</artifactId>
                     <version>2.4.0-b180830.0438</version>
                     <scope>provided</scope>
-                </dependency> 
+                </dependency>
                 <dependency>
                     <groupId>javax.annotation</groupId>
                     <artifactId>javax.annotation-api</artifactId>
@@ -174,7 +179,7 @@
                 </dependency>
             </dependencies>
         </profile>
-        
+
         <!-- Enforce code coverage -->
         <profile>
             <id>enforce-code-coverage</id>
@@ -187,20 +192,20 @@
                 <plugins>
                     <plugin>
                         <groupId>org.jacoco</groupId>
-                        <artifactId>jacoco-maven-plugin</artifactId> 
-                        <version>0.8.5</version> 
-                        <executions> 
-                            <execution> 
-                                <goals> 
-                                    <goal>prepare-agent</goal> 
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.5</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>prepare-agent</goal>
                                 </goals>
                             </execution>
-                            <execution> 
-                                <id>report</id> 
-                                <phase>prepare-package</phase> 
-                                <goals> 
-                                    <goal>report</goal> 
-                                </goals> 
+                            <execution>
+                                <id>report</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
                             </execution>
                         </executions>
                     </plugin>
@@ -213,7 +218,7 @@
         <repository>
             <id>netbeans-releases</id>
             <url>http://bits.netbeans.org/maven2/</url>
-        </repository>        
+        </repository>
         <repository>
             <id>oss-jfrog-artifactory-releases</id>
             <url>https://oss.jfrog.org/artifactory/oss-release-local</url>
