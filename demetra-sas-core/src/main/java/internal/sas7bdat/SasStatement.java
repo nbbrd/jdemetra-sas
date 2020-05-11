@@ -22,7 +22,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
-import javax.annotation.Nonnull;
 import java.util.SortedMap;
 import java.util.SortedSet;
 
@@ -41,6 +40,7 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import sasquatch.SasColumn;
 import sasquatch.SasForwardCursor;
 import sasquatch.SasMetaData;
@@ -58,8 +58,8 @@ public final class SasStatement implements Closeable {
     @lombok.NonNull
     private final Path conn;
 
-    @Nonnull
-    public SasForwardCursor executeQuery(@Nonnull DbBasicSelect query) throws IOException {
+    @NonNull
+    public SasForwardCursor executeQuery(@NonNull DbBasicSelect query) throws IOException {
         SasForwardCursor input = sasquatch.readForward(conn.resolve(query.getTableName()));
 
         Function<String, SasColumn> toColumn = toColumnByName(input.getColumns());

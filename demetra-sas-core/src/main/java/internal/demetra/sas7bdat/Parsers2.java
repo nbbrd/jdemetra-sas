@@ -18,6 +18,8 @@ package internal.demetra.sas7bdat;
 
 import ec.tss.tsproviders.utils.DataFormat;
 import ec.tss.tsproviders.utils.IParser;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -26,7 +28,6 @@ import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalQuery;
 import java.util.Locale;
 import java.util.Objects;
-import javax.annotation.Nonnull;
 
 /**
  *
@@ -35,8 +36,8 @@ import javax.annotation.Nonnull;
 @lombok.experimental.UtilityClass
 class Parsers2 {
 
-    @Nonnull
-    public <T> IParser<T> dateTimeParser(@Nonnull DataFormat obsFormat, @Nonnull TemporalQuery<T> query) {
+    @NonNull
+    public <T> IParser<T> dateTimeParser(@NonNull DataFormat obsFormat, @NonNull TemporalQuery<T> query) {
         try {
             return onDateTimeFormatter(newDateTimeFormatter(obsFormat.getDatePattern(), obsFormat.getLocale()), query);
         } catch (IllegalArgumentException ex) {

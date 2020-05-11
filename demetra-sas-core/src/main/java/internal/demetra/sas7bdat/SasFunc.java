@@ -26,8 +26,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.Objects;
-import javax.annotation.Nonnull;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import sasquatch.SasColumn;
 import sasquatch.SasForwardCursor;
 
@@ -37,40 +37,40 @@ import sasquatch.SasForwardCursor;
  */
 public interface SasFunc<T> extends DbUtil.Func<SasForwardCursor, T, IOException> {
 
-    @Nonnull
+    @NonNull
     static SasFunc<String> onNull() {
         return NullFunc.INSTANCE;
     }
 
-    @Nonnull
+    @NonNull
     static SasFunc<String[]> onGetStringArray(int index, int length) {
         return o -> getStringArray(o, index, length);
     }
 
-    @Nonnull
+    @NonNull
     static SasFunc<String> onGetObjectToString(int index) {
         return o -> getObjectToString(o, index);
     }
 
-    @Nonnull
+    @NonNull
     static <X> SasFunc<X> compose(int index, IParser<X> parser) {
         return o -> getAndParse(o, index, parser);
     }
 
-    @Nonnull
+    @NonNull
     static SasFunc<LocalDate> onDate(SasForwardCursor rs, int index, IParser<LocalDate> dateParser) throws IOException {
         SasFunc<LocalDate> result = dateByDataType(rs.getColumns().get(index), index);
         return result != null ? result : compose(index, dateParser);
     }
 
     @Deprecated
-    @Nonnull
+    @NonNull
     static SasFunc<java.util.Date> onCalendar(SasForwardCursor rs, int index, IParser<java.util.Date> dateParser) throws IOException {
         SasFunc<java.util.Date> result = calendarByDataType(rs.getColumns().get(index), index);
         return result != null ? result : compose(index, dateParser);
     }
 
-    @Nonnull
+    @NonNull
     static SasFunc<Number> onNumber(SasForwardCursor rs, int index, IParser<Number> numberParser) throws IOException {
         SasFunc<Number> result = numberByDataType(rs.getColumns().get(index), index);
         return result != null ? result : compose(index, numberParser);

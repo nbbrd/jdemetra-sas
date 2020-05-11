@@ -24,8 +24,9 @@ import ec.tss.tsproviders.db.DbAccessor;
 import ec.tss.tsproviders.db.DbProvider;
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openide.util.lookup.ServiceProvider;
 import org.slf4j.LoggerFactory;
 import sasquatch.Sasquatch;
@@ -50,7 +51,7 @@ public final class SasProvider extends DbProvider<SasBean> implements IFileLoade
         this.paths = new File[0];
     }
 
-    @Nonnull
+    @NonNull
     public Sasquatch getSasquatch() {
         return sasquatch.get();
     }

@@ -39,8 +39,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicReference;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.openide.util.lookup.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,7 +91,7 @@ public final class SasFileProvider implements IFileLoader {
         this.tsSupport = CubeSupport.asTsProvider(NAME, logger, cubeSupport, monikerSupport, cache::clear);
     }
 
-    @Nonnull
+    @NonNull
     public Sasquatch getSasquatch() {
         return sasquatch.get();
     }

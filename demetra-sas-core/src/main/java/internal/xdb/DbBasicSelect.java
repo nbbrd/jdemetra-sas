@@ -17,6 +17,9 @@
 package internal.xdb;
 
 import ec.tstoolkit.design.IBuilder;
+import ec.tstoolkit.design.Immutable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,8 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
 
 /**
  *
@@ -50,7 +51,7 @@ public final class DbBasicSelect {
         this.orderColumns = orderColumns;
     }
 
-    @Nonnull
+    @NonNull
     public String getTableName() {
         return tableName;
     }
@@ -59,22 +60,22 @@ public final class DbBasicSelect {
         return distinct;
     }
 
-    @Nonnull
+    @NonNull
     public List<String> getSelectColumns() {
         return selectColumns;
     }
 
-    @Nonnull
+    @NonNull
     public Map<String, String> getFilterItems() {
         return filterItems;
     }
 
-    @Nonnull
+    @NonNull
     public List<String> getOrderColumns() {
         return orderColumns;
     }
 
-    @Nonnull
+    @NonNull
     public String toSql() {
         StringBuilder result = new StringBuilder();
         result.append("SELECT ");
@@ -105,8 +106,8 @@ public final class DbBasicSelect {
         return toSql();
     }
 
-    @Nonnull
-    public static Builder from(@Nonnull String tableName) {
+    @NonNull
+    public static Builder from(@NonNull String tableName) {
         return new Builder(tableName);
     }
 
@@ -131,24 +132,24 @@ public final class DbBasicSelect {
             return this;
         }
 
-        @Nonnull
+        @NonNull
         public Builder distinct(boolean distinct) {
             this.distinct = distinct;
             return this;
         }
 
-        @Nonnull
+        @NonNull
         public Builder select(String... columns) {
             return addIfNotNullOrEmpty(select, columns);
         }
 
-        @Nonnull
+        @NonNull
         public Builder filter(Map<String, String> filter) {
             this.filterItems.putAll(filter);
             return this;
         }
 
-        @Nonnull
+        @NonNull
         public Builder orderBy(String... columns) {
             return addIfNotNullOrEmpty(this.order, columns);
         }

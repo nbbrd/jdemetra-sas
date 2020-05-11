@@ -39,9 +39,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AccessLevel;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import sasquatch.SasForwardCursor;
 import sasquatch.Sasquatch;
 
@@ -52,16 +52,16 @@ import sasquatch.Sasquatch;
 @lombok.AllArgsConstructor(access = AccessLevel.PRIVATE)
 public final class SasTableAsCubeResource implements TableAsCubeAccessor.Resource<LocalDate> {
 
-    @Nonnull
+    @NonNull
     public static SasTableAsCubeResource create(
-            @Nonnull Sasquatch sasquatch,
-            @Nonnull HasFilePaths paths,
-            @Nonnull File folder,
-            @Nonnull String table,
-            @Nonnull List<String> dimColumns,
-            @Nonnull TableDataParams tdp,
-            @Nonnull ObsGathering gathering,
-            @Nonnull String labelColumn) {
+            @NonNull Sasquatch sasquatch,
+            @NonNull HasFilePaths paths,
+            @NonNull File folder,
+            @NonNull String table,
+            @NonNull List<String> dimColumns,
+            @NonNull TableDataParams tdp,
+            @NonNull ObsGathering gathering,
+            @NonNull String labelColumn) {
         return new SasTableAsCubeResource(sasquatch, paths, folder, table, CubeId.root(dimColumns), tdp, gathering, labelColumn);
     }
 
@@ -163,14 +163,14 @@ public final class SasTableAsCubeResource implements TableAsCubeAccessor.Resourc
     @VisibleForTesting
     interface SasQuery<T> {
 
-        @Nonnull
+        @NonNull
         DbBasicSelect getQuery();
 
         @Nullable
-        T process(@Nonnull SasForwardCursor rs, @Nonnull AutoCloseable closeable) throws IOException;
+        T process(@NonNull SasForwardCursor rs, @NonNull AutoCloseable closeable) throws IOException;
 
         @Nullable
-        default T call(@Nonnull Sasquatch sasquatch, @Nonnull HasFilePaths paths, @Nonnull File folder) throws IOException {
+        default T call(@NonNull Sasquatch sasquatch, @NonNull HasFilePaths paths, @NonNull File folder) throws IOException {
             SasStatement stmt = null;
             SasForwardCursor rs = null;
             try {

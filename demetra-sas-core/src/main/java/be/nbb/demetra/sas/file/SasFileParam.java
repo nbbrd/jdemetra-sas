@@ -26,6 +26,8 @@ import ec.tss.tsproviders.utils.DataFormat;
 import ec.tss.tsproviders.utils.IConfig;
 import ec.tss.tsproviders.utils.IParam;
 import ec.tss.tsproviders.utils.ObsGathering;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import static ec.tss.tsproviders.utils.Params.onInteger;
 import static ec.tss.tsproviders.utils.Params.onLong;
 import static ec.tss.tsproviders.utils.Params.onObsGathering;
@@ -35,7 +37,6 @@ import java.io.File;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import javax.annotation.Nonnull;
 import static ec.tss.tsproviders.utils.Params.onDataFormat;
 import java.util.Collections;
 
@@ -45,11 +46,11 @@ import java.util.Collections;
  */
 interface SasFileParam extends IParam<DataSource, SasFileBean> {
 
-    @Nonnull
+    @NonNull
     String getVersion();
 
-    @Nonnull
-    IParam<DataSet, CubeId> getCubeIdParam(@Nonnull DataSource dataSource);
+    @NonNull
+    IParam<DataSet, CubeId> getCubeIdParam(@NonNull DataSource dataSource);
 
     class V1 implements SasFileParam {
 
