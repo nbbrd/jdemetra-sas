@@ -24,7 +24,7 @@
     </licenses>
 
     <properties>
-        <demetra.version>2.2.0</demetra.version>
+        <demetra.version>2.2.3</demetra.version>
         <sasquatch.version>1.0.0</sasquatch.version>
     </properties>
 
@@ -222,10 +222,6 @@
     </profiles>
 
     <repositories>
-        <repository>
-            <id>netbeans-releases</id>
-            <url>http://bits.netbeans.org/maven2/</url>
-        </repository>
         <repository>
             <id>oss-jfrog-artifactory-releases</id>
             <url>https://oss.jfrog.org/artifactory/oss-release-local</url>
