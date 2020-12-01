@@ -74,9 +74,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>de.siegmar</groupId>
-            <artifactId>fastcsv</artifactId>
-            <version>1.0.4</version>
+            <groupId>be.nbb.rd</groupId>
+            <artifactId>picocsv</artifactId>
+            <version>1.2.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

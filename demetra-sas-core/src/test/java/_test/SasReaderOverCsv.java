@@ -16,9 +16,6 @@
  */
 package _test;
 
-import de.siegmar.fastcsv.reader.CsvParser;
-import de.siegmar.fastcsv.reader.CsvReader;
-import de.siegmar.fastcsv.reader.CsvRow;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -31,6 +28,7 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import nbbrd.picocsv.Csv;
 import sasquatch.SasColumn;
 import sasquatch.SasColumnType;
 import sasquatch.SasForwardCursor;
@@ -91,21 +89,19 @@ public final class SasReaderOverCsv implements SasReader {
     }
 
     private List<Object[]> readDataFromCsv(Path file) throws IOException {
-        List<Object[]> result = new ArrayList<>();
-        CsvReader csvReader = new CsvReader();
-        csvReader.setFieldSeparator(';');
-        csvReader.setContainsHeader(true);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.FRENCH);
-        try ( CsvParser parser = csvReader.parse(file, StandardCharsets.UTF_8)) {
-            CsvRow row;
-            while ((row = parser.nextRow()) != null) {
+
+        List<Object[]> result = new ArrayList<>();
+        try ( Csv.Reader reader = Csv.Reader.of(file, StandardCharsets.UTF_8, Csv.Format.EXCEL, Csv.Parsing.LENIENT)) {
+            reader.readLine();
+            while (reader.readLine()) {
                 Object[] fields = new Object[4];
-                fields[0] = row.getField(0);
-                fields[1] = row.getField(1);
-                fields[2] = dateFormatter.parse(row.getField(2), LocalDate::from);
+                fields[0] = reader.readField() ? reader.toString() : null;
+                fields[1] = reader.readField() ? reader.toString() : null;
+                fields[2] = dateFormatter.parse(reader.readField() ? reader : null, LocalDate::from);
                 try {
-                    fields[3] = numberFormat.parse(row.getField(3));
+                    fields[3] = numberFormat.parse(reader.readField() ? reader.toString() : null);
                 } catch (ParseException ex) {
                     throw new IOException(ex);
                 }
