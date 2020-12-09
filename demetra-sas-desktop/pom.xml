@@ -14,7 +14,7 @@
     <name>Demetra - Sas - Desktop</name>
 
     <properties>
-        <project.x.binaries>${project.build.directory}/binaries</project.x.binaries>
+        <project.x.binaries>${project.basedir}/../binaries</project.x.binaries>
     </properties>
     
     <dependencyManagement>
@@ -101,10 +101,22 @@
         <dependency>
             <groupId>eu.europa.ec.joinup.sat</groupId>
             <artifactId>nbdemetra-ui</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-javahelp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>eu.europa.ec.joinup.sat</groupId>
             <artifactId>nbdemetra-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-modules-javahelp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <dependency>
@@ -128,6 +140,19 @@
 
     <build>
         <plugins>
+            <!-- Clean binaries directory -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${project.x.binaries}</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
             <!-- Generates NBM file -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -154,7 +179,7 @@
                 <version>3.0.0</version>
                 <executions>
                     <execution>
-                        <phase>verify</phase>
+                        <phase>package</phase>
                         <configuration>
                             <target>
                                 <copy file="${project.build.directory}/${project.build.finalName}.nbm" 
@@ -175,6 +200,7 @@
                 <version>1.9</version>
                 <executions>
                     <execution>
+                        <phase>package</phase>
                         <goals>
                             <goal>files</goal>
                         </goals>
