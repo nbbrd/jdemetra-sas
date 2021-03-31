@@ -1,46 +1,38 @@
 /*
  * Copyright 2018 National Bank of Belgium
- * 
- * Licensed under the EUPL, Version 1.1 or - as soon they will be approved 
+ *
+ * Licensed under the EUPL, Version 1.1 or - as soon they will be approved
  * by the European Commission - subsequent versions of the EUPL (the "Licence");
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
- * 
+ *
  * http://ec.europa.eu/idabc/eupl
- * 
- * Unless required by applicable law or agreed to in writing, software 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the Licence is distributed on an "AS IS" basis,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the Licence for the specific language governing permissions and 
+ * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
  */
 package _test;
 
+import nbbrd.picocsv.Csv;
+import sasquatch.*;
+import sasquatch.spi.SasFeature;
+import sasquatch.spi.SasReader;
+import sasquatch.util.SasCursors;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import nbbrd.picocsv.Csv;
-import sasquatch.SasColumn;
-import sasquatch.SasColumnType;
-import sasquatch.SasForwardCursor;
-import sasquatch.SasMetaData;
-import sasquatch.SasScrollableCursor;
-import sasquatch.SasSplittableCursor;
-import sasquatch.spi.SasFeature;
-import sasquatch.spi.SasReader;
-import sasquatch.util.SasCursors;
+import java.util.*;
 
 /**
- *
  * @author Philippe Charles
  */
 public final class SasReaderOverCsv implements SasReader {
@@ -93,7 +85,9 @@ public final class SasReaderOverCsv implements SasReader {
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.FRENCH);
 
         List<Object[]> result = new ArrayList<>();
-        try ( Csv.Reader reader = Csv.Reader.of(file, StandardCharsets.UTF_8, Csv.Format.EXCEL, Csv.Parsing.LENIENT)) {
+        Csv.Format format = Csv.Format.builder().delimiter(';').build();
+        Csv.ReaderOptions options = Csv.ReaderOptions.builder().lenientSeparator(true).build();
+        try (Csv.Reader reader = Csv.Reader.of(format, options, Files.newBufferedReader(file, StandardCharsets.UTF_8), Csv.DEFAULT_CHAR_BUFFER_SIZE)) {
             reader.readLine();
             while (reader.readLine()) {
                 Object[] fields = new Object[4];

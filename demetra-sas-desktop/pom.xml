@@ -132,7 +132,7 @@
         </dependency>
         
         <dependency>
-            <groupId>be.nbb.rd</groupId>
+            <groupId>com.github.nbbrd.sasquatch</groupId>
             <artifactId>sasquatch-ri</artifactId>
             <version>${sasquatch.version}</version>
         </dependency>
