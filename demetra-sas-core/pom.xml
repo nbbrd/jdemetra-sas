@@ -14,6 +14,8 @@
     <packaging>jar</packaging>
 
     <name>Demetra - Sas - Core</name>
+    <description>A pure Java library to read time series from SAS datasets.</description>
+    <url>https://github.com/nbbrd/jdemetra-sas</url>
 
     <dependencyManagement>
         <dependencies>
