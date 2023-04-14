@@ -81,7 +81,7 @@ public final class SasReaderOverCsv implements SasReader {
     }
 
     private List<Object[]> readDataFromCsv(Path file) throws IOException {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy", Locale.ROOT);
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.FRENCH);
 
         List<Object[]> result = new ArrayList<>();
