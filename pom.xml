@@ -50,7 +50,7 @@
         <x.github.user>nbbrd</x.github.user>
         <x.github.repo>jdemetra-sas</x.github.repo>
 
-        <demetra.version>2.2.5</demetra.version>
+        <demetra.version>2.2.4</demetra.version>
         <sasquatch.version>1.0.1</sasquatch.version>
     </properties>
 
