@@ -26,10 +26,11 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import static org.junit.Assert.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import sasquatch.SasForwardCursor;
 import sasquatch.Sasquatch;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  *

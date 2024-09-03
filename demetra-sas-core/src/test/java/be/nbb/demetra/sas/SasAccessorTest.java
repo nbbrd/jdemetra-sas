@@ -21,8 +21,9 @@ import ec.tss.tsproviders.IFileLoaderAssert;
 import ec.tss.tsproviders.db.DbSeries;
 import java.io.File;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import sasquatch.Sasquatch;
 
 /**
@@ -48,6 +49,6 @@ public class SasAccessorTest {
     public void test() throws Exception {
         SasAccessor accessor = new SasAccessor(Sasquatch.of(new SasReaderOverCsv()), createBean());
         List<DbSeries> allSeries = accessor.getAllSeriesWithData();
-        Assert.assertEquals(12, allSeries.size());
+        Assertions.assertEquals(12, allSeries.size());
     }
 }

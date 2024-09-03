@@ -20,10 +20,8 @@ import ec.tss.tsproviders.utils.DataFormat;
 import ec.tss.tsproviders.utils.IParser;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.format.DateTimeParseException;
-import java.time.format.FormatStyle;
+import java.time.chrono.IsoChronology;
+import java.time.format.*;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalQuery;
 import java.util.Locale;
@@ -75,11 +73,12 @@ class Parsers2 {
         if (!datePattern.isEmpty()) {
             result.appendPattern(datePattern);
         } else {
-            result.append(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+            // FIXME: not sure about using localized format
+            result.append(new DateTimeFormatterBuilder().appendLocalized(FormatStyle.MEDIUM, null).toFormatter(Locale.getDefault(Locale.Category.FORMAT)));
         }
 
         return locale != null
                 ? result.toFormatter(locale)
-                : result.toFormatter();
+                : result.toFormatter(Locale.getDefault(Locale.Category.FORMAT));
     }
 }

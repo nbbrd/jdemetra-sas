@@ -1,48 +1,38 @@
 /*
  * Copyright 2018 National Bank of Belgium
- * 
- * Licensed under the EUPL, Version 1.1 or - as soon they will be approved 
+ *
+ * Licensed under the EUPL, Version 1.1 or - as soon they will be approved
  * by the European Commission - subsequent versions of the EUPL (the "Licence");
  * You may not use this work except in compliance with the Licence.
  * You may obtain a copy of the Licence at:
- * 
+ *
  * http://ec.europa.eu/idabc/eupl
- * 
- * Unless required by applicable law or agreed to in writing, software 
+ *
+ * Unless required by applicable law or agreed to in writing, software
  * distributed under the Licence is distributed on an "AS IS" basis,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the Licence for the specific language governing permissions and 
+ * See the Licence for the specific language governing permissions and
  * limitations under the Licence.
  */
 package _test;
 
-import de.siegmar.fastcsv.reader.CsvParser;
-import de.siegmar.fastcsv.reader.CsvReader;
-import de.siegmar.fastcsv.reader.CsvRow;
+import nbbrd.picocsv.Csv;
+import sasquatch.*;
+import sasquatch.spi.SasFeature;
+import sasquatch.spi.SasReader;
+import sasquatch.util.SasCursors;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import sasquatch.SasColumn;
-import sasquatch.SasColumnType;
-import sasquatch.SasForwardCursor;
-import sasquatch.SasMetaData;
-import sasquatch.SasScrollableCursor;
-import sasquatch.SasSplittableCursor;
-import sasquatch.spi.SasFeature;
-import sasquatch.spi.SasReader;
-import sasquatch.util.SasCursors;
+import java.util.*;
 
 /**
- *
  * @author Philippe Charles
  */
 public final class SasReaderOverCsv implements SasReader {
@@ -91,21 +81,21 @@ public final class SasReaderOverCsv implements SasReader {
     }
 
     private List<Object[]> readDataFromCsv(Path file) throws IOException {
-        List<Object[]> result = new ArrayList<>();
-        CsvReader csvReader = new CsvReader();
-        csvReader.setFieldSeparator(';');
-        csvReader.setContainsHeader(true);
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy", Locale.ROOT);
         NumberFormat numberFormat = NumberFormat.getInstance(Locale.FRENCH);
-        try ( CsvParser parser = csvReader.parse(file, StandardCharsets.UTF_8)) {
-            CsvRow row;
-            while ((row = parser.nextRow()) != null) {
+
+        List<Object[]> result = new ArrayList<>();
+        Csv.Format format = Csv.Format.builder().delimiter(';').build();
+        Csv.ReaderOptions options = Csv.ReaderOptions.builder().lenientSeparator(true).build();
+        try (Csv.Reader reader = Csv.Reader.of(format, options, Files.newBufferedReader(file, StandardCharsets.UTF_8), Csv.DEFAULT_CHAR_BUFFER_SIZE)) {
+            reader.readLine();
+            while (reader.readLine()) {
                 Object[] fields = new Object[4];
-                fields[0] = row.getField(0);
-                fields[1] = row.getField(1);
-                fields[2] = dateFormatter.parse(row.getField(2), LocalDate::from);
+                fields[0] = reader.readField() ? reader.toString() : null;
+                fields[1] = reader.readField() ? reader.toString() : null;
+                fields[2] = dateFormatter.parse(reader.readField() ? reader : null, LocalDate::from);
                 try {
-                    fields[3] = numberFormat.parse(row.getField(3));
+                    fields[3] = numberFormat.parse(reader.readField() ? reader.toString() : null);
                 } catch (ParseException ex) {
                     throw new IOException(ex);
                 }

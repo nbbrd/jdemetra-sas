@@ -7,13 +7,15 @@
     <parent>
         <groupId>be.nbb.demetra</groupId>
         <artifactId>demetra-sas-parent</artifactId>
-        <version>2.2.1</version>
+        <version>2.2.2</version>
     </parent>
 
     <artifactId>demetra-sas-core</artifactId>
     <packaging>jar</packaging>
 
     <name>Demetra - Sas - Core</name>
+    <description>A pure Java library to read time series from SAS datasets.</description>
+    <url>https://github.com/nbbrd/jdemetra-sas</url>
 
     <dependencyManagement>
         <dependencies>
@@ -42,18 +44,31 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE220</version>
             <scope>provided</scope>
         </dependency>
 
         <!-- compile and runtime -->
         <dependency>
-            <groupId>be.nbb.rd</groupId>
+            <groupId>com.github.nbbrd.sasquatch</groupId>
             <artifactId>sasquatch-api</artifactId>
             <version>${sasquatch.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-openide-util-lookup</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>eu.europa.ec.joinup.sat</groupId>
             <artifactId>demetra-jdbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-openide-util-lookup</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- test only -->
@@ -63,8 +78,8 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -73,9 +88,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>de.siegmar</groupId>
-            <artifactId>fastcsv</artifactId>
-            <version>1.0.3</version>
+            <groupId>com.github.nbbrd.picocsv</groupId>
+            <artifactId>picocsv</artifactId>
+            <version>2.4.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
