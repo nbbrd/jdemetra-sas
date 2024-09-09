@@ -35,7 +35,7 @@ import ec.tss.tsproviders.utils.IParam;
 import ec.tstoolkit.utilities.GuavaCaches;
 import internal.demetra.sas7bdat.SasTableAsCubeResource;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -46,6 +46,7 @@ import org.openide.util.lookup.ServiceProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sasquatch.Sasquatch;
+import sasquatch.util.SasFilenameFilter;
 
 /**
  *
@@ -105,18 +106,20 @@ public final class SasFileProvider implements IFileLoader {
 
     @Override
     public String getDisplayName() {
-        return "Sas";
+        return "Sas files";
     }
 
     @Override
     public String getFileDescription() {
-        return "Folder";
+        return "Folder or file";
     }
 
     @Override
     public boolean accept(File pathname) {
-        return pathname.isDirectory();
+        return pathname.isDirectory() || SAS_FILENAME_FILTER.accept(pathname);
     }
+
+    private static final FileFilter SAS_FILENAME_FILTER = new SasFilenameFilter();
 
     @lombok.AllArgsConstructor
     private static final class SasFileCubeResource implements CubeSupport.Resource {
@@ -145,8 +148,14 @@ public final class SasFileProvider implements IFileLoader {
 
         private CubeAccessor load(DataSource key) {
             SasFileBean bean = param.get(key);
-            SasTableAsCubeResource result = SasTableAsCubeResource.create(sasquatch.get(), paths, bean.getFile(), bean.getTable(), bean.getDimColumns(), toDataParams(bean), bean.getObsGathering(), bean.getLabelColumn());
+            SasTableAsCubeResource result = toCubeResource(bean);
             return TableAsCubeAccessor.create(result).bulk(bean.getCacheDepth(), GuavaCaches.ttlCacheAsMap(bean.getCacheTtl()));
+        }
+
+        private SasTableAsCubeResource toCubeResource(SasFileBean bean) {
+            return bean.getFile().isDirectory()
+                    ? SasTableAsCubeResource.create(sasquatch.get(), paths, bean.getFile(), bean.getTable(), bean.getDimColumns(), toDataParams(bean), bean.getObsGathering(), bean.getLabelColumn())
+                    : SasTableAsCubeResource.create(sasquatch.get(), paths, bean.getFile().getParentFile(), bean.getFile().getName(), bean.getDimColumns(), toDataParams(bean), bean.getObsGathering(), bean.getLabelColumn());
         }
 
         private static TableDataParams toDataParams(SasFileBean bean) {

@@ -125,10 +125,10 @@ public final class SasFileProviderBuddy implements IDataSourceProviderBuddy {
     }
 
     @NbBundle.Messages({
-        "bean.file.display=Database repository",
-        "bean.file.description=The path to the database repository.",
+        "bean.file.display=Database repository or file",
+        "bean.file.description=The path to the database repository or a single .sas7bdat file.",
         "bean.table.display=Table name",
-        "bean.table.description=The name of the table (or view) that contains observations."})
+        "bean.table.description=The name of the table (or view) that contains observations. This field may be empty when using a single .sas7bdat file instead of a database repository"})
     private static NodePropertySetBuilder withSource(NodePropertySetBuilder b, SasFileBean bean, IFileLoader loader, ConcurrentMap cache) {
         b.withFile()
                 .select(bean, "file")

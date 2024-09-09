@@ -29,6 +29,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
@@ -77,22 +78,26 @@ public class SasAutoCompletion {
                 .collect(Collectors.joining(delimiter));
     }
 
-    private Path open(HasFilePaths paths, Supplier<File> repo) throws IOException {
-        return paths.resolveFilePath(repo.get()).toPath();
+    private Path open(HasFilePaths paths, File repo) throws IOException {
+        return paths.resolveFilePath(repo).toPath();
     }
 
     private boolean canLoadTables(Supplier<File> repo) {
         return repo.get() != null && !repo.get().getPath().isEmpty();
     }
 
-    private List<String> loadTables(HasFilePaths paths, Supplier<File> file) throws IOException {
-        try (DirectoryStream<Path> ds = Files.newDirectoryStream(open(paths, file), "*.sas7bdat")) {
-            List<String> result = new ArrayList<>();
-            for (Path path : ds) {
-                result.add(path.getFileName().toString());
+    private List<String> loadTables(HasFilePaths paths, Supplier<File> repo) throws IOException {
+        File folderOrFile = repo.get();
+        if (folderOrFile.isDirectory()) {
+            try (DirectoryStream<Path> ds = Files.newDirectoryStream(open(paths, folderOrFile), "*.sas7bdat")) {
+                List<String> result = new ArrayList<>();
+                for (Path path : ds) {
+                    result.add(path.getFileName().toString());
+                }
+                return result;
             }
-            return result;
         }
+        return Collections.emptyList();
     }
 
     private List<String> filterAndSortTables(List<String> values, String term) {
@@ -106,12 +111,15 @@ public class SasAutoCompletion {
         return file.get().getPath();
     }
 
-    private boolean canLoadColumns(Supplier<File> file, Supplier<String> table) {
-        return canLoadTables(file) && !Strings.isNullOrEmpty(table.get());
+    private boolean canLoadColumns(Supplier<File> repo, Supplier<String> table) {
+        return canLoadTables(repo) && (!repo.get().isDirectory() || !Strings.isNullOrEmpty(table.get()));
     }
 
     private List<SasColumn> loadColumns(Sasquatch sasquatch, HasFilePaths paths, Supplier<File> repo, Supplier<String> table) throws IOException {
-        return sasquatch.readMetaData(open(paths, repo).resolve(table.get())).getColumns();
+        File folderOrFile = repo.get();
+        return folderOrFile.isDirectory()
+                ? sasquatch.readMetaData(open(paths, folderOrFile).resolve(table.get())).getColumns()
+                : sasquatch.readMetaData(open(paths, folderOrFile)).getColumns();
     }
 
     private List<SasColumn> filterAndSortColumns(List<SasColumn> values, String term) {
