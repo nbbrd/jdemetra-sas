@@ -81,7 +81,7 @@ public final class SasProvider extends DbProvider<SasBean> implements IFileLoade
 
     @Override
     public String getDisplayName() {
-        return "Sas";
+        return "Sas files";
     }
 
     @Override
