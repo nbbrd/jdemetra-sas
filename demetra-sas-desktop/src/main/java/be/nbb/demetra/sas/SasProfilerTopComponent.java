@@ -118,6 +118,10 @@ public final class SasProfilerTopComponent extends TopComponent implements Explo
         fileViewer.setFile(null);
     }
 
+    public void setFile(File file) {
+        fileViewer.setFile(file);
+    }
+
     void writeProperties(java.util.Properties p) {
         // better to version settings since initial version as advocated at
         // http://wiki.apidesign.org/wiki/PropertyFiles
