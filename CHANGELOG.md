@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Add support of single file in addition to folder in SasFileProvider [#265](https://github.com/nbbrd/jdemetra-sas/issues/265)
 - Add profile file action [#266](https://github.com/nbbrd/jdemetra-sas/issues/266)
 
+### Changed
+
+- Modernize use of NIO API
+
 ## [2.2.2] - 2024-09-03
 
 This is a bugfix release of **jdemetra-sas**.  

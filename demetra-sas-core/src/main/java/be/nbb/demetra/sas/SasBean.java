@@ -20,6 +20,7 @@ import ec.tss.tsproviders.DataSource;
 import ec.tss.tsproviders.IFileBean;
 import ec.tss.tsproviders.db.DbBean;
 import java.io.File;
+import java.nio.file.Paths;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class SasBean extends DbBean.BulkBean implements IFileBean {
 
     @Override
     public File getFile() {
-        return new File(getDbName());
+        return Paths.get(getDbName()).toFile();
     }
 
     @Override
@@ -46,6 +47,6 @@ public final class SasBean extends DbBean.BulkBean implements IFileBean {
     }
 
     public File getTableFile() {
-        return new File(getDbName(), getTableName());
+        return Paths.get(getDbName(), getTableName()).toFile();
     }
 }
