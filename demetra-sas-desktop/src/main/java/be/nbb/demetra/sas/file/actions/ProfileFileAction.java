@@ -19,6 +19,7 @@ import org.openide.util.actions.Presenter;
 
 import javax.swing.*;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -71,7 +72,7 @@ public final class ProfileFileAction extends AbilityNodeAction3<DataSource> impl
             SasFileBean bean = loader.get().decodeBean(dataSource);
             File file = bean.getFile();
             File realFile = Files2.getAbsoluteFile(loader.get().getPaths(), file);
-            return realFile != null && realFile.isDirectory() ? new File(realFile, bean.getTable()) : realFile;
+            return realFile != null && realFile.isDirectory() ? realFile.toPath().resolve(bean.getTable()).toFile() : realFile;
         }
         return null;
     }

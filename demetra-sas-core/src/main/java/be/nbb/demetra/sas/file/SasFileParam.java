@@ -34,6 +34,7 @@ import static ec.tss.tsproviders.utils.Params.onObsGathering;
 import static ec.tss.tsproviders.utils.Params.onString;
 import static ec.tss.tsproviders.utils.Params.onStringList;
 import java.io.File;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -77,7 +78,7 @@ interface SasFileParam extends IParam<DataSource, SasFileBean> {
         @Override
         public SasFileBean defaultValue() {
             SasFileBean result = new SasFileBean();
-            result.setFile(new File(dbName.defaultValue()));
+            result.setFile(Paths.get(dbName.defaultValue()).toFile());
             result.setTable(tableName.defaultValue());
             result.setDimColumns(dimColumns.defaultValue());
             result.setPeriodColumn(periodColumn.defaultValue());
@@ -94,7 +95,7 @@ interface SasFileParam extends IParam<DataSource, SasFileBean> {
         @Override
         public SasFileBean get(DataSource dataSource) {
             SasFileBean result = new SasFileBean();
-            result.setFile(new File(dbName.get(dataSource)));
+            result.setFile(Paths.get(dbName.get(dataSource)).toFile());
             result.setTable(tableName.get(dataSource));
             result.setDimColumns(dimColumns.get(dataSource));
             result.setPeriodColumn(periodColumn.get(dataSource));
