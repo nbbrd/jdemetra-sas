@@ -39,6 +39,10 @@ This is a bugfix release of **jdemetra-sas**.
 This is the initial release of **jdemetra-sas**.  
 [JDemetra+ 2.2.0 or later version](https://github.com/jdemetra/jdemetra-app/releases) is required to run it.
 
+### Added
+
+- Initial release
+
 [Unreleased]: https://github.com/nbbrd/jdemetra-sas/compare/v2.2.2...HEAD
 [2.2.2]: https://github.com/nbbrd/jdemetra-sas/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/nbbrd/jdemetra-sas/releases/tag/v2.2.1
