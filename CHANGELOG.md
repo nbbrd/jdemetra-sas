@@ -25,14 +25,14 @@ This is a bugfix release of **jdemetra-sas**.
 
 - Add generation of signature on binaries
 
-### Fixed
-
-- Fix potential bugs related to system settings
-
 ### Changed
 
 - Minimum JDemetra+ version is now v2.2.4
 - Bump sasquatch from [1.0.0 to 1.1.0](https://github.com/nbbrd/sasquatch/blob/develop/CHANGELOG.md)
+
+### Fixed
+
+- Fix potential bugs related to system settings
 
 ## [2.2.1] - 2020-06-09
 
