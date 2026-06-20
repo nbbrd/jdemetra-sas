@@ -52,7 +52,7 @@
         <x.github.repo>jdemetra-sas</x.github.repo>
 
         <demetra.version>2.2.4</demetra.version>
-        <sasquatch.version>1.1.1</sasquatch.version>
+        <sasquatch.version>1.1.2</sasquatch.version>
         <heylogs.version>0.19.1</heylogs.version>
     </properties>
 
